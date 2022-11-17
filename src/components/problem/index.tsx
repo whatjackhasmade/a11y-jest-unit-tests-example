@@ -1,7 +1,5 @@
 import React from "react";
-import FocusLock from "react-focus-lock";
-
-import { useClickOutside, useKeyPress, useScrollLock } from "../../hooks";
+import { useClickOutside, useScrollLock } from "../../hooks";
 import * as S from "../styles";
 
 export type ModalProps = {
@@ -33,7 +31,6 @@ const Modal: React.FC<ModalProps> = ({
 	// Close modal on click outside or escape key press
 	const contentRef = React.useRef<HTMLDivElement>(null);
 	useClickOutside(contentRef, handleClose, isOpen);
-	useKeyPress("Escape", handleClose);
 
 	return (
 		<>
@@ -46,20 +43,17 @@ const Modal: React.FC<ModalProps> = ({
 						ref={contentRef}
 						role="dialog"
 					>
-						<FocusLock returnFocus>
-							<S.Close>
-								<button
-									onClick={() => {
-										console.log("On click");
-										handleClose();
-									}}
-									type="button"
-								>
-									{labels.close}
-								</button>
-							</S.Close>
-							<S.Content>{children}</S.Content>
-						</FocusLock>
+						<S.Close>
+							<button
+								onClick={() => {
+									handleClose();
+								}}
+								type="button"
+							>
+								{labels.close}
+							</button>
+						</S.Close>
+						<S.Content>{children}</S.Content>
 					</S.Overlay>
 				</S.Wrapper>
 			)}

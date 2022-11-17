@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../src/components/1";
+import Modal from "../src/components/problem";
 // import Modal from "../src/components/2";
 
 import * as S from "../src/styles";
